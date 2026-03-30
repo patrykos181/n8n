@@ -1,198 +1,169 @@
 # Roadmap produktu
 
-## 1. ICP (Ideal Customer Profile)
+## 1) ICP (Ideal Customer Profile)
 
 ### Segmenty docelowe
 - **Małe i średnie firmy usługowe (10–250 pracowników)**
-  - Branże: księgowość, doradztwo, HR, kancelarie, firmy serwisowe, edukacja i szkolenia.
-  - Potrzeba: automatyzacja powtarzalnych procesów operacyjnych i komunikacji z klientami.
-- **E-commerce (D2C i B2B, 5–200 osób w zespole)**
-  - Sklepy online o rosnącej liczbie zamówień i kanałów sprzedaży.
-  - Potrzeba: automatyzacja obsługi zamówień, leadów, wsparcia klienta i raportowania.
+  - Przykłady: biura księgowe, doradztwo, HR, kancelarie, edukacja, firmy serwisowe.
+  - Problem: ręczne przeklejanie danych między systemami i brak spójnych procesów.
+- **E-commerce (5–200 osób, D2C/B2B)**
+  - Problem: duża liczba zdarzeń (zamówienia, zwroty, leady, zgłoszenia supportowe).
 - **Agencje (marketingowe, software house, kreatywne, rekrutacyjne)**
-  - Praca projektowa z wieloma klientami i narzędziami.
-  - Potrzeba: standaryzacja onboardingów klientów, automatyzacja handoverów i raportów.
+  - Problem: wiele kont klientów i powtarzalny onboarding/procesy raportowe.
 
 ### Wspólne cechy ICP
-- Używają minimum 5 narzędzi SaaS i mają problem z „ręcznym” przenoszeniem danych.
+- Korzystają z min. 5 narzędzi SaaS (CRM, helpdesk, marketing, komunikacja, billing).
 - Mają ograniczone zasoby techniczne (brak dedykowanego zespołu automatyzacji).
-- Decydenci: właściciel, COO, Head of Operations, Head of Growth, Account Director.
-- Główne kryteria zakupu: szybki time-to-value, niski koszt wdrożenia, bezpieczeństwo danych, mierzalny ROI.
+- Decydenci: właściciel, COO/Head of Ops, Head of Growth, Account Director.
+- Kryteria zakupu: szybki time-to-value, niski koszt wdrożenia, bezpieczeństwo, ROI.
 
 ---
 
-## 2. Trzy główne use-case’y automatyzacji
+## 2) Główne use-case’y automatyzacji (Top 3)
 
-### Use-case 1: Lead routing i kwalifikacja
-**Cel:** skrócenie czasu reakcji na nowe leady i zwiększenie konwersji sprzedażowej.
+### UC1: Lead routing i kwalifikacja
+**Cel:** skrócić czas pierwszego kontaktu i zwiększyć konwersję MQL→SQL.
 
-**Przepływ (high-level):**
-1. Lead wpada z formularza / CRM / kampanii.
-2. Automatyczna walidacja i enrichment (np. branża, wielkość firmy, źródło).
-3. Przypisanie leada do odpowiedniego handlowca wg reguł (region, segment, obciążenie).
-4. Utworzenie zadania i powiadomień (Slack/e-mail/CRM).
-5. Aktualizacja statusu i logowanie SLA pierwszego kontaktu.
+**Przepływ:**
+1. Trigger: nowy lead (formularz/CRM/ad platforma).
+2. Walidacja + enrichment (źródło, branża, kraj, rozmiar firmy).
+3. Routing wg reguł (region, segment, obciążenie handlowca).
+4. Utworzenie tasku i powiadomienia (CRM + Slack/e-mail).
+5. Pomiar SLA i statusów lejka.
 
-**Wartość biznesowa:**
-- Krótszy „first response time”.
-- Mniej utraconych leadów.
-- Większa przewidywalność pipeline’u.
+### UC2: Onboarding klienta po wygranej sprzedaży
+**Cel:** skrócić czas od „Won” do pierwszej wartości dla klienta.
 
-### Use-case 2: Onboarding klienta
-**Cel:** przyspieszenie i ustandaryzowanie startu współpracy.
+**Przepływ:**
+1. Trigger: status „Won” w CRM.
+2. Utworzenie projektu i checklisty onboardingowej.
+3. Wysłanie pakietu startowego (formularze, dokumenty, harmonogram).
+4. Provisioning dostępów i przypisanie ownerów.
+5. Automatyczny raport statusu onboardingowego.
 
-**Przepływ (high-level):**
-1. Zmiana statusu „Won” w CRM uruchamia workflow.
-2. Tworzy się projekt/board/taski onboardingowe.
-3. Automatycznie wysyłane są dokumenty i checklisty kickoff.
-4. Zakładane są konta dostępu oraz harmonogram spotkań.
-5. Status onboardingowy raportowany do zespołu delivery.
+### UC3: Raportowanie operacyjne i zarządcze
+**Cel:** usunąć ręczne raportowanie i zwiększyć szybkość decyzji.
 
-**Wartość biznesowa:**
-- Szybszy time-to-first-value dla klienta.
-- Mniej błędów operacyjnych i pominiętych kroków.
-- Lepsze doświadczenie klienta od pierwszego dnia.
-
-### Use-case 3: Raportowanie operacyjne i zarządcze
-**Cel:** ograniczenie ręcznego przygotowywania raportów i poprawa jakości decyzji.
-
-**Przepływ (high-level):**
-1. Cykliczne pobieranie danych z kluczowych systemów (CRM, e-commerce, helpdesk).
-2. Agregacja i normalizacja metryk.
-3. Generowanie dashboardu/raportu okresowego (dzienny/tygodniowy/miesięczny).
-4. Dystrybucja do właścicieli metryk (e-mail/Slack/BI).
-5. Alertowanie przy odchyleniach KPI.
-
-**Wartość biznesowa:**
-- Oszczędność czasu zespołów operacyjnych.
-- Jedno źródło prawdy dla KPI.
-- Szybsze wykrywanie problemów i trendów.
+**Przepływ:**
+1. Harmonogramowe pobieranie danych z CRM/e-commerce/helpdesku.
+2. Standaryzacja i agregacja metryk.
+3. Generowanie raportu (dzienny/tygodniowy/miesięczny).
+4. Dystrybucja i alerty anomalii KPI.
 
 ---
 
-## 3. Zakres MVP + out-of-scope
+## 3) Zakres MVP + out-of-scope
 
-## MVP (minimum funkcji do sprzedaży)
-1. **Builder workflow (podstawowy)**
-   - Tworzenie sekwencji trigger → akcja → warunek.
-   - Minimum 20 gotowych integracji kluczowych dla ICP.
-2. **Biblioteka szablonów use-case**
-   - Gotowe szablony dla lead routing, onboarding, raportowanie.
-3. **Podstawowe zarządzanie danymi i mapowaniem pól**
-   - Mapowanie wejścia/wyjścia, transformacje bazowe, walidacje.
-4. **Monitoring i logi uruchomień**
-   - Historia wykonania, statusy błędów, retry manualny.
-5. **Role i dostęp (RBAC-lite)**
-   - Co najmniej role: admin + operator.
-6. **Onboarding produktu**
-   - Checklista startowa, 3 interaktywne guided flows.
-7. **Plan billingowy „starter” i podstawowe limity użycia**
-   - Miesięczny limit uruchomień, alert przy przekroczeniu.
+### MVP (minimum funkcji do sprzedaży)
+1. **Workflow builder (core):** trigger → action → condition.
+2. **Minimum 20 integracji** kluczowych dla ICP.
+3. **Szablony „one-click”** dla UC1/UC2/UC3.
+4. **Mapowanie pól + walidacje** (podstawowe transformacje danych).
+5. **Monitoring wykonań** (statusy, logi błędów, retry manualny).
+6. **RBAC-lite** (role: Admin, Operator).
+7. **Starter billing** (limity uruchomień + alert o limicie).
+8. **Onboarding in-app** (checklista + guided setup).
 
-## Out-of-scope (poza MVP)
-- Zaawansowane orkiestracje wieloetapowe z pętlami i custom code execution.
-- Enterprise SSO/SAML, SCIM, rozbudowany audyt compliance.
-- Marketplace partnerów i publiczne API v2.
-- Zaawansowane AI-agenty i rekomendacje workflowów w czasie rzeczywistym.
-- White-label i multi-workspace billing hierarchy.
+### Out-of-scope (dla MVP)
+- Zaawansowane orkiestracje (pętle, custom code sandbox, złożone dependency graph).
+- Enterprise IAM (SSO/SAML/SCIM) i rozszerzony audyt compliance.
+- Marketplace partnerów i public API v2.
+- AI copilots działające w czasie rzeczywistym.
+- White-label i wielopoziomowa hierarchia billingowa.
 
 ---
 
-## 4. Mierniki sukcesu
+## 4) Mierniki sukcesu
 
-## North-star i KPI operacyjne
-- **Aktywacje (Activation Rate)**
-  - Definicja: odsetek nowych kont, które w ciągu 7 dni utworzą i poprawnie uruchomią min. 1 workflow produkcyjny.
-  - Cel na 2 kwartały: **≥ 45%**.
-- **Retencja 30-dniowa (Logo Retention D30)**
-  - Definicja: odsetek kont aktywnych po 30 dniach od aktywacji.
-  - Cel na 2 kwartały: **≥ 70%**.
-- **ARPA (Average Revenue Per Account)**
-  - Definicja: średni miesięczny przychód na aktywne konto płacące.
-  - Cel na 2 kwartały: **wzrost o 20%** względem baseline.
-- **Churn (logo / revenue)**
-  - Definicja: miesięczny odpływ klientów i MRR.
-  - Cel na 2 kwartały: **logo churn < 4% / miesiąc**, **revenue churn < 3% / miesiąc**.
+### KPI główne
+- **Aktywacje (Activation Rate):** % nowych kont, które uruchomią 1 produkcyjny workflow w 7 dni.  
+  **Cel (2 kwartały):** ≥ 45%.
+- **Retencja 30-dniowa (Logo Retention D30):** % kont aktywnych po 30 dniach od aktywacji.  
+  **Cel (2 kwartały):** ≥ 70%.
+- **ARPA:** średni miesięczny przychód na aktywne konto płacące.  
+  **Cel (2 kwartały):** +20% vs baseline.
+- **Churn (logo/revenue):** miesięczny odpływ klientów/MRR.  
+  **Cel (2 kwartały):** logo churn < 4%/mies., revenue churn < 3%/mies.
 
-## Mierniki pomocnicze
+### KPI wspierające
 - Median time-to-first-workflow.
-- Odsetek workflowów zakończonych sukcesem (success run rate).
-- Średnia liczba aktywnych workflowów na konto po 30 dniach.
-- Udział kont korzystających z min. 2 use-case’ów.
+- Success run rate workflowów.
+- Średnia liczba aktywnych workflowów po 30 dniach.
+- % kont korzystających z min. 2 use-case’ów.
 
 ---
 
-## 5. Backlog V1/V2 z priorytetyzacją RICE
+## 5) Backlog V1/V2 z priorytetyzacją RICE
 
-> Skala RICE: Reach (miesięcznie), Impact (0.25–3), Confidence (0–100%), Effort (osobo-miesiące)  
-> **Score = (Reach × Impact × Confidence) / Effort**
+**Wzór RICE:** `Score = (Reach × Impact × Confidence) / Effort`  
+Skale: Reach (miesięcznie), Impact (0.25–3), Confidence (0–1), Effort (osobo-miesiące).
 
-## V1 (0–6 miesięcy)
+### V1 (0–6 miesięcy)
 
-| Inicjatywa | Reach | Impact | Confidence | Effort | RICE Score | Priorytet |
+| Inicjatywa | Reach | Impact | Confidence | Effort | Score | Priorytet |
 |---|---:|---:|---:|---:|---:|---|
-| Szablony: Lead Routing (CRM + formularze) | 400 | 3.0 | 0.85 | 2 | 510 | P0 |
-| Onboarding klienta: paczka gotowych workflowów | 300 | 2.5 | 0.80 | 2 | 300 | P0 |
-| Dashboard logów + retry | 500 | 2.0 | 0.90 | 3 | 300 | P0 |
+| Szablony Lead Routing (CRM + formularze) | 400 | 3.0 | 0.85 | 2 | 510.0 | P0 |
+| Paczka onboardingowa „Won→Kickoff” | 300 | 2.5 | 0.80 | 2 | 300.0 | P0 |
+| Monitoring + retry + dashboard logów | 500 | 2.0 | 0.90 | 3 | 300.0 | P0 |
 | Guided onboarding in-app | 450 | 1.5 | 0.85 | 2 | 286.9 | P1 |
-| Integracje e-commerce (zamówienia + fulfillment) | 250 | 2.0 | 0.75 | 2 | 187.5 | P1 |
+| Integracje e-commerce (order + fulfillment) | 250 | 2.0 | 0.75 | 2 | 187.5 | P1 |
 | Alerty KPI (Slack/e-mail) | 350 | 1.5 | 0.70 | 2 | 183.8 | P1 |
-| RBAC-lite + audit log basic | 220 | 1.5 | 0.80 | 2 | 132 | P2 |
+| RBAC-lite + basic audit log | 220 | 1.5 | 0.80 | 2 | 132.0 | P2 |
 
-## V2 (6–12 miesięcy)
+### V2 (6–12 miesięcy)
 
-| Inicjatywa | Reach | Impact | Confidence | Effort | RICE Score | Priorytet |
+| Inicjatywa | Reach | Impact | Confidence | Effort | Score | Priorytet |
 |---|---:|---:|---:|---:|---:|---|
-| Rozszerzone warunki i gałęzie workflowów | 280 | 2.5 | 0.70 | 3 | 163.3 | P1 |
-| AI assistant do mapowania pól i wykrywania błędów | 320 | 2.0 | 0.60 | 4 | 96 | P2 |
-| Public API v2 + webhooks management | 200 | 2.0 | 0.65 | 3 | 86.7 | P2 |
-| SSO/SAML dla planu enterprise | 120 | 2.5 | 0.75 | 3 | 75 | P2 |
+| Rozszerzone warunki i gałęzie workflow | 280 | 2.5 | 0.70 | 3 | 163.3 | P1 |
+| AI assistant (mapowanie pól + diagnostyka) | 320 | 2.0 | 0.60 | 4 | 96.0 | P2 |
+| Public API v2 + webhook management | 200 | 2.0 | 0.65 | 3 | 86.7 | P2 |
+| SSO/SAML (enterprise plan) | 120 | 2.5 | 0.75 | 3 | 75.0 | P2 |
 | Marketplace szablonów partnerów | 180 | 1.5 | 0.55 | 4 | 37.1 | P3 |
 
 ---
 
-## 6. Kryteria gotowości do produkcji i go-live checklist
+## 6) Kryteria gotowości produkcyjnej + go-live checklist
 
-## Kryteria gotowości do produkcji (Definition of Production Ready)
-1. **Stabilność i jakość**
-   - 0 blockerów i 0 krytycznych bugów otwartych na release branch.
-   - Testy E2E dla 3 kluczowych use-case’ów przechodzą ≥ 95%.
-   - Error rate workflow runtime poniżej ustalonego progu (np. < 1.5%).
+### Definition of Production Ready
+1. **Jakość i stabilność**
+   - 0 blockerów i 0 krytycznych bugów na release branch.
+   - E2E dla UC1/UC2/UC3 przechodzą na poziomie ≥ 95%.
+   - Runtime error rate < 1.5%.
 2. **Bezpieczeństwo i zgodność**
-   - Przegląd uprawnień i sekretów zakończony.
-   - Skan podatności bez krytycznych findings.
-   - Aktualna polityka retencji i backup danych.
+   - Przegląd uprawnień/secrets zakończony.
+   - Brak krytycznych podatności.
+   - Retencja i backup danych potwierdzone.
 3. **Operacyjność (SRE/Support)**
-   - Alerting i dashboardy produkcyjne aktywne.
-   - Runbooki incydentowe dla awarii integracji i kolejek.
-   - On-call i eskalacja z przypisaniem odpowiedzialności.
+   - Alerting + dashboardy produkcyjne aktywne.
+   - Runbooki incydentowe i model eskalacji gotowe.
+   - On-call oraz ownership dla awarii zdefiniowane.
 4. **Gotowość biznesowa**
-   - Cennik, limity i reguły billingowe przetestowane end-to-end.
-   - Sales enablement: demo, one-pager, FAQ i playbook objection handling.
-   - Support enablement: makra odpowiedzi, procedury triage.
+   - Billing i limity przetestowane end-to-end.
+   - Materiały sales enablement (demo, one-pager, FAQ) gotowe.
+   - Support playbook + makra triage gotowe.
 
-## Go-live checklist
+### Go-live checklist
 
-### T-14 do T-7 dni
-- [ ] Zamrożenie zakresu (scope freeze) i potwierdzenie release candidate.
-- [ ] Finalny przegląd ryzyk + plan rollback.
-- [ ] Ukończenie testów regresji i smoke testów.
-- [ ] Walidacja telemetry/analytics events dla KPI.
+#### T-14 do T-7
+- [ ] Scope freeze i potwierdzenie release candidate.
+- [ ] Przegląd ryzyk + plan rollback.
+- [ ] Regresja + smoke testy zakończone.
+- [ ] Walidacja eventów telemetry/analytics dla KPI.
 
-### T-6 do T-1 dni
-- [ ] Przegląd konfiguracji środowiska produkcyjnego.
-- [ ] Migracje danych przetestowane na środowisku staging.
-- [ ] Komunikacja do klientów (release notes, status page, support brief).
-- [ ] Szkolenie zespołu support/sales z nowego zakresu MVP.
+#### T-6 do T-1
+- [ ] Finalny review konfiguracji produkcyjnej.
+- [ ] Migracje danych sprawdzone na staging.
+- [ ] Komunikacja do klientów (release notes/status page/support brief).
+- [ ] Szkolenie support/sales z zakresu MVP.
 
-### Dzień 0 (Go-live)
-- [ ] Wdrożenie produkcyjne w zaplanowanym oknie.
-- [ ] Monitoring metryk health-check przez min. 2 godziny.
-- [ ] Weryfikacja krytycznych ścieżek: lead routing, onboarding, raportowanie.
-- [ ] Potwierdzenie braku degradacji KPI i błędów krytycznych.
+#### Dzień 0 (Go-live)
+- [ ] Wdrożenie w zaplanowanym oknie.
+- [ ] Monitoring health-check min. 2h po deployu.
+- [ ] Weryfikacja ścieżek krytycznych (UC1/UC2/UC3).
+- [ ] Potwierdzenie braku regresji krytycznych KPI.
 
-### Dzień 1–7 (Hypercare)
-- [ ] Codzienny przegląd incydentów i ticketów.
-- [ ] Raport KPI: aktywacje, D30 proxy, ARPA proxy, churn proxy.
-- [ ] Priorytetyzacja hotfixów wg wpływu na klientów.
-- [ ] Decyzja o zakończeniu hypercare i wejściu w standardowy cykl release.
+#### Dzień 1–7 (Hypercare)
+- [ ] Codzienny przegląd incydentów/ticketów.
+- [ ] Raport KPI (aktywacje, D30 proxy, ARPA proxy, churn proxy).
+- [ ] Priorytetyzacja hotfixów wg wpływu na klienta.
+- [ ] Decyzja o zakończeniu hypercare.
