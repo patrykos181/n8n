@@ -1,0 +1,60 @@
+name: CD
+
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+
+permissions:
+  contents: read
+  deployments: write
+
+jobs:
+  deploy_dev:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
+      - run: echo "Deploying to dev..."
+      - run: echo "kubectl apply -f k8s/dev"
+
+  deploy_stage_blue:
+    needs: deploy_dev
+    runs-on: ubuntu-latest
+    environment: stage
+    steps:
+      - run: echo "Deploying BLUE in stage..."
+      - run: echo "helm upgrade --install app-blue ./chart -f values-stage.yaml"
+
+  smoke_stage_blue:
+    needs: deploy_stage_blue
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Running stage smoke tests against BLUE"
+
+  switch_stage_traffic:
+    needs: smoke_stage_blue
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Switching stage traffic to BLUE"
+
+  deploy_prod_canary:
+    if: ${{ github.event.workflow_run.head_branch == 'main' }}
+    needs: switch_stage_traffic
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+      - run: echo "Deploying canary to prod (10%)"
+      - run: echo "helm upgrade --install app ./chart -f values-prod.yaml --set canary.weight=10"
+
+  verify_canary:
+    needs: deploy_prod_canary
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Checking SLO, errors, and latency for canary"
+
+  promote_or_rollback:
+    needs: verify_canary
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "If healthy => 100% traffic, otherwise rollback"
