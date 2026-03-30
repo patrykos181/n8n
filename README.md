@@ -1,4 +1,29 @@
-# Security baseline implementation
+# Monorepo skeleton
+
+## Struktura
+
+- `apps/web` — frontend.
+- `apps/api` — REST/GraphQL.
+- `apps/worker` — obsługa kolejek i zadań asynchronicznych.
+- `packages/ui` — współdzielone komponenty UI.
+- `packages/shared` — wspólne typy, utilsy i kontrakty domenowe.
+- `infra/` — IaC, deployment i konfiguracja środowisk.
+
+## Jakość kodu
+
+- Lint: `npm run lint`
+- Format: `npm run format` / `npm run format:check`
+- Typecheck: `npm run typecheck`
+- Hooki:
+  - `pre-commit` → `lint-staged`
+  - `commit-msg` → `commitlint`
+
+## Konwencje i proces wydawniczy
+
+- Engineering conventions: `docs/engineering/conventions.md`
+- Branching/versioning/release notes: `docs/engineering/release-process.md`
+
+## Security baseline (dodane w gałęzi feature)
 
 Implementacja obejmuje wymagane obszary:
 
@@ -18,12 +43,12 @@ Implementacja obejmuje wymagane obszary:
 6. **Audit logi operacji administracyjnych i zmian konfiguracji**
    - Zapisywane liniowo JSON do `audit.log`.
 
-## Uruchomienie
+## Uruchomienie baseline
 
 ```bash
 npm install
 npm run check
-npm start
+npm run start:security-baseline
 ```
 
 > To jest baseline referencyjny do dalszej integracji z produkcyjnym IdP, KMS/Vault i trwałą bazą danych.

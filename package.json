@@ -1,10 +1,20 @@
 {
-  "name": "n8n-security-baseline",
-  "version": "1.0.0",
+  "name": "n8n-monorepo",
   "private": true,
+  "version": "0.1.0",
+  "description": "Monorepo scaffold for web, api, worker and shared packages.",
   "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
-    "start": "node src/server.js",
+    "lint": "npm run lint --workspaces --if-present",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "prepare": "husky",
+    "start:security-baseline": "node src/server.js",
     "check": "node --check src/server.js && node --check src/auth/service.js && node --check src/security/rbac.js && node --check src/security/secrets.js && node --check src/security/audit.js"
   },
   "dependencies": {
@@ -14,5 +24,17 @@
     "express-rate-limit": "^7.5.0",
     "helmet": "^8.0.0",
     "otplib": "^12.0.1"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.7.1",
+    "@commitlint/config-conventional": "^19.7.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.2.10",
+    "prettier": "^3.5.3"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,json,md,yml,yaml}": [
+      "prettier --write"
+    ]
   }
 }
