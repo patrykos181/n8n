@@ -1,0 +1,57 @@
+funnel:
+  - stage: visit
+    events:
+      - name: page_view
+        required_params: [page_type, url, referrer, utm_source, utm_medium, utm_campaign]
+      - name: cta_view
+        required_params: [cta_id, cta_variant, page_type]
+      - name: cta_click
+        required_params: [cta_id, cta_variant, page_type, placement]
+      - name: scroll_depth
+        required_params: [page_type, depth_percent]
+      - name: roi_calculator_started
+        required_params: [page_type]
+
+  - stage: signup
+    events:
+      - name: form_started
+        required_params: [form_id, page_type]
+      - name: form_submitted
+        required_params: [form_id, page_type, lead_type]
+      - name: demo_booked
+        required_params: [meeting_type, page_type]
+      - name: lead_magnet_downloaded
+        required_params: [magnet_id, page_type]
+
+  - stage: activation
+    events:
+      - name: signup_completed
+        required_params: [workspace_plan]
+      - name: first_workflow_imported
+        required_params: [workflow_template_id]
+      - name: first_workflow_activated
+        required_params: [workflow_id]
+      - name: integration_connected
+        required_params: [integration_name]
+
+global_properties:
+  - session_id
+  - user_id
+  - account_id
+  - anonymous_id
+  - locale
+  - device_type
+  - experiment_id
+  - session_intent_score
+
+naming_conventions:
+  event_case: snake_case
+  property_case: snake_case
+  avoid_prefixes:
+    - click_
+    - submit_
+
+quality_checks:
+  - no PII in event payload
+  - every CTA click has cta_id + placement
+  - funnel stage coverage >= 95% key templates

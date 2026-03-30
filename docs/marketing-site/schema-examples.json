@@ -1,0 +1,40 @@
+{
+  "organization": {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Twoja firma",
+    "url": "https://example.com",
+    "logo": "https://example.com/logo.png",
+    "sameAs": [
+      "https://www.linkedin.com/company/twoja-firma"
+    ]
+  },
+  "faqPage": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Jak szybko uruchomimy pierwszą automatyzację?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Pierwsze workflow zwykle wdrażamy w 7-14 dni roboczych."
+        }
+      }
+    ]
+  },
+  "article": {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Jak wdrożyć n8n w firmie",
+    "author": {
+      "@type": "Person",
+      "name": "Imię Nazwisko"
+    },
+    "datePublished": "2026-03-30",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Twoja firma"
+    }
+  }
+}
