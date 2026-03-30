@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "description": "Monorepo scaffold for web, api, worker and shared packages.",
+  "type": "module",
   "workspaces": [
     "apps/*",
     "packages/*"
@@ -12,6 +13,17 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "typecheck": "npm run typecheck --workspaces --if-present",
+    "prepare": "husky",
+    "start:security-baseline": "node src/server.js",
+    "check": "node --check src/server.js && node --check src/auth/service.js && node --check src/security/rbac.js && node --check src/security/secrets.js && node --check src/security/audit.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "csurf": "^1.11.0",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.0.0",
+    "otplib": "^12.0.1"
     "prepare": "husky"
   },
   "devDependencies": {
