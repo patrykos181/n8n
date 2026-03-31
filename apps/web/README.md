@@ -1,5 +1,6 @@
 # apps/web
 
+Minimalna strona prezentacyjna projektu z podstawowym quality gate (lint, typecheck, test).
 Minimalna, statyczna strona prezentacyjna projektu.
 
 ## Uruchomienie lokalne
@@ -16,4 +17,13 @@ Aplikacja będzie dostępna pod adresem: `http://localhost:4173`.
 npm run --workspace @n8n/web build
 ```
 
+Wynik trafia do katalogu `apps/web/dist`.
+
+## Quality gate
+
+```bash
+npm run --workspace @n8n/web lint
+npm run --workspace @n8n/web typecheck
+npm run --workspace @n8n/web test
+```
 Wynik trafi do katalogu `apps/web/dist`.

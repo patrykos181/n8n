@@ -9,12 +9,12 @@
     "packages/*"
   ],
   "scripts": {
-    "lint": "echo 'Lint step placeholder: no workspace linters configured yet'",
+    "lint": "npm run --workspace @n8n/web lint",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "typecheck": "echo 'No typecheck configured yet'",
-    "test": "node --test",
-    "build": "echo 'No build configured yet'",
+    "typecheck": "npm run --workspace @n8n/web typecheck",
+    "test": "npm run --workspace @n8n/web test && node --test",
+    "build": "npm run --workspace @n8n/web build",
     "prepare": "husky",
     "start:security-baseline": "node src/server.js",
     "check": "node --check src/server.js && node --check src/auth/service.js && node --check src/security/rbac.js && node --check src/security/secrets.js && node --check src/security/audit.js",
