@@ -240,12 +240,27 @@ textarea {
   font-weight: 600;
 }
 
+.field-error {
+  color: #b91c1c;
+  min-height: 1rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+
 .form-success {
   color: #0f766e;
 }
 
 .form-error {
   color: #b91c1c;
+}
+
+.thank-you-panel {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #f8fbff;
 }
 
 .mobile-sticky-cta {

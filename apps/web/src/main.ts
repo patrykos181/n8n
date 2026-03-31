@@ -49,19 +49,77 @@ if (observedSections.length > 0) {
 
 const contactForm = document.getElementById("contact-form");
 const leadSummary = document.getElementById("lead-summary");
+const thankYouPanel = document.getElementById("thank-you-panel");
+
+type TrackingPayload = Record<string, string>;
+type TrackingEvent = { event: string } & TrackingPayload;
+declare global {
+  interface Window {
+    dataLayer?: TrackingEvent[];
+  }
+}
+
+const track = (event: string, payload: TrackingPayload = {}) => {
+  window.dataLayer = window.dataLayer ?? [];
+  window.dataLayer.push({ event, ...payload });
+};
+
+const requiredFields = [
+  "name",
+  "email",
+  "company",
+  "industry",
+  "scale",
+  "budget",
+  "timeline",
+] as const;
+
+const setFieldError = (form: HTMLFormElement, fieldName: string, message: string) => {
+  const errorElement = form.querySelector(`[data-error-for="${fieldName}"]`);
+  if (errorElement instanceof HTMLElement) {
+    errorElement.textContent = message;
+  }
+};
+
+const clearFieldErrors = (form: HTMLFormElement) => {
+  requiredFields.forEach((fieldName) => setFieldError(form, fieldName, ""));
+};
+
+const validateForm = (formData: FormData, form: HTMLFormElement) => {
+  clearFieldErrors(form);
+  let valid = true;
+
+  requiredFields.forEach((fieldName) => {
+    const value = String(formData.get(fieldName) ?? "").trim();
+    if (!value) {
+      setFieldError(form, fieldName, "To pole jest wymagane.");
+      valid = false;
+    }
+  });
+
+  const emailValue = String(formData.get("email") ?? "").trim();
+  if (emailValue && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue)) {
+    setFieldError(form, "email", "Podaj poprawny adres e-mail.");
+    valid = false;
+  }
+
+  return valid;
+};
 
 if (contactForm instanceof HTMLFormElement && leadSummary instanceof HTMLElement) {
+  contactForm.addEventListener("focusin", () => {
+    track("form_started", { form: "contact_prequal" });
+  });
+
   contactForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
     const formData = new FormData(contactForm);
-    const fields = ["industry", "scale", "budget", "timeline"];
-    const complete = fields.every((field) => String(formData.get(field) ?? "").trim().length > 0);
-
-    if (!complete) {
-      leadSummary.textContent =
-        "Uzupełnij proszę pola kwalifikacyjne: branża, skala, budżet i termin.";
+    const valid = validateForm(formData, contactForm);
+    if (!valid) {
+      leadSummary.textContent = "Formularz zawiera błędy. Uzupełnij wymagane pola.";
       leadSummary.className = "form-message form-error";
+      track("form_submit_error", { form: "contact_prequal" });
       return;
     }
 
@@ -72,6 +130,10 @@ if (contactForm instanceof HTMLFormElement && leadSummary instanceof HTMLElement
 
     leadSummary.textContent = `Dziękujemy! Lead zakwalifikowany do segmentu: ${segment}. Odpowiemy do 24h roboczych.`;
     leadSummary.className = "form-message form-success";
+    if (thankYouPanel instanceof HTMLElement) {
+      thankYouPanel.hidden = false;
+    }
+    track("form_submitted", { form: "contact_prequal", segment });
     contactForm.reset();
   });
 }
