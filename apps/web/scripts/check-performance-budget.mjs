@@ -1,3 +1,4 @@
+/* global process, console */
 import { readdir, stat, readFile } from "node:fs/promises";
 import path from "node:path";
 
