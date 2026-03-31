@@ -1,6 +1,7 @@
 # apps/web
 
 Minimalna strona prezentacyjna projektu z podstawowym quality gate (lint, typecheck, test).
+Minimalna, statyczna strona prezentacyjna projektu.
 
 ## Uruchomienie lokalne
 
@@ -25,3 +26,4 @@ npm run --workspace @n8n/web lint
 npm run --workspace @n8n/web typecheck
 npm run --workspace @n8n/web test
 ```
+Wynik trafi do katalogu `apps/web/dist`.
