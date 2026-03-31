@@ -154,21 +154,27 @@
         <div class="container">
           <h2>Cennik</h2>
           <p class="section-task"><strong>Główne zadanie użytkownika:</strong> oszacować budżet projektu.</p>
-          <div class="feature-grid">
+          <div class="pricing-grid">
             <article>
+              <p class="pricing-tag">Dla startu</p>
               <h3>Starter</h3>
               <p>1 proces, podstawowe integracje, wdrożenie MVP.</p>
-              <p><strong>od 4 900 zł</strong></p>
+              <p class="pricing-price">od 4 900 zł</p>
+              <a class="button button-secondary" href="#kontakt">Wybieram Starter</a>
             </article>
             <article>
+              <p class="pricing-tag">Najczęściej wybierany</p>
               <h3>Growth</h3>
               <p>3–5 procesów, observability, standardy utrzymania.</p>
-              <p><strong>od 12 900 zł</strong></p>
+              <p class="pricing-price">od 12 900 zł</p>
+              <a class="button button-primary" href="#kontakt">Wybieram Growth</a>
             </article>
             <article>
+              <p class="pricing-tag">Dla złożonych wdrożeń</p>
               <h3>Enterprise</h3>
               <p>Wielozespołowe wdrożenie, SLA i governance.</p>
-              <p><strong>wycena indywidualna</strong></p>
+              <p class="pricing-price">wycena indywidualna</p>
+              <a class="button button-secondary" href="#kontakt">Porozmawiajmy</a>
             </article>
           </div>
         </div>
@@ -176,15 +182,43 @@
 
       <div class="container section-cta"><a class="button button-primary" href="#kontakt">Poproś o wycenę</a></div>
 
+      <section id="opinie" class="section">
+        <div class="container">
+          <h2>Opinie klientów</h2>
+          <p class="section-task"><strong>Główne zadanie użytkownika:</strong> zweryfikować wiarygodność i styl współpracy.</p>
+          <div class="testimonials">
+            <article>
+              <p>„W 6 tygodni zredukowaliśmy manualną pracę operacji o 40%. Zespół dostał proces, który jest przewidywalny.”</p>
+              <p><strong>COO, firma e-commerce</strong></p>
+            </article>
+            <article>
+              <p>„Największa wartość to transparentność: alerty, logi i jasna odpowiedzialność za każdy etap workflow.”</p>
+              <p><strong>Head of Operations, SaaS B2B</strong></p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <div class="container section-cta"><a class="button button-primary" href="#kontakt">Chcę podobne rezultaty</a></div>
+
       <section id="faq" class="section">
         <div class="container">
           <h2>FAQ</h2>
           <p class="section-task"><strong>Główne zadanie użytkownika:</strong> usunąć obiekcje przed kontaktem.</p>
-          <ul>
-            <li><strong>Ile trwa start?</strong> Najczęściej pierwsze MVP działa w 2–4 tygodnie.</li>
-            <li><strong>Czy wspieracie bezpieczeństwo?</strong> Tak, wdrażamy monitoring, logowanie i polityki dostępu.</li>
-            <li><strong>Czy możemy rozwijać to wewnętrznie?</strong> Tak, przekazujemy dokumentację i szkolimy zespół.</li>
-          </ul>
+          <div class="faq-accordion">
+            <details>
+              <summary>Ile trwa start?</summary>
+              <p>Najczęściej pierwsze MVP działa w 2–4 tygodnie.</p>
+            </details>
+            <details>
+              <summary>Czy wspieracie bezpieczeństwo?</summary>
+              <p>Tak, wdrażamy monitoring, logowanie i polityki dostępu.</p>
+            </details>
+            <details>
+              <summary>Czy możemy rozwijać to wewnętrznie?</summary>
+              <p>Tak, przekazujemy dokumentację i szkolimy zespół.</p>
+            </details>
+          </div>
         </div>
       </section>
 
@@ -203,6 +237,21 @@
       </section>
 
       <div class="container section-cta"><a class="button button-primary" href="#kontakt">Poznaj zespół na callu</a></div>
+
+      <section id="guideline" class="section section-alt">
+        <div class="container">
+          <h2>Guideline użycia komponentów</h2>
+          <p class="section-task"><strong>Cel:</strong> spójność wizualna i przewidywalne UX w kolejnych sekcjach.</p>
+          <ul>
+            <li><strong>Buttony:</strong> 1 główny CTA na sekcję (primary), akcje pomocnicze jako secondary.</li>
+            <li><strong>Karty:</strong> każda karta zawiera nagłówek, problem, rozwiązanie i rezultat albo CTA.</li>
+            <li><strong>Formularze:</strong> etykieta nad polem, walidacja inline, komunikat statusu pod formularzem.</li>
+            <li><strong>FAQ accordion:</strong> pytanie w <code>summary</code>, jedna odpowiedź na panel, max 4–6 paneli na sekcję.</li>
+            <li><strong>Testimonials:</strong> cytat + rola osoby, bez anonimowych opinii i bez długich bloków tekstu.</li>
+            <li><strong>Pricing:</strong> 3 pakiety, wyróżnij jeden plan jako domyślny wybór przyciskiem primary.</li>
+          </ul>
+        </div>
+      </section>
 
       <section id="kontakt" class="section">
         <div class="container contact-box">
