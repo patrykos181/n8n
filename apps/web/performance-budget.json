@@ -1,0 +1,29 @@
+{
+  "resourceBudgets": [
+    {
+      "resourceType": "total",
+      "budget": 250
+    },
+    {
+      "resourceType": "script",
+      "budget": 90
+    },
+    {
+      "resourceType": "stylesheet",
+      "budget": 55
+    },
+    {
+      "resourceType": "image",
+      "budget": 150
+    },
+    {
+      "resourceType": "font",
+      "budget": 70
+    }
+  ],
+  "webVitals": {
+    "lcpMs": 2500,
+    "cls": 0.1,
+    "inpMs": 200
+  }
+}

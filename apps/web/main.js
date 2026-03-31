@@ -3,9 +3,6 @@ const contactForm = document.getElementById("contact-form");
 const leadSummary = document.getElementById("lead-summary");
 const thankYouPanel = document.getElementById("thank-you-panel");
 const faqItems = document.querySelectorAll(".faq-accordion details");
-const revealItems = document.querySelectorAll("main > section, .section-cta");
-const statNumbers = document.querySelectorAll(".stat-number");
-const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 if (yearElement) {
   yearElement.textContent = String(new Date().getFullYear());
@@ -27,85 +24,52 @@ if (faqItems.length) {
   });
 }
 
-const animateCount = (element) => {
-  const targetValue = Number(element.dataset.value ?? "0");
-  const prefix = element.dataset.prefix ?? "";
-  const suffix = element.dataset.suffix ?? "";
-  const decimalPlaces = Number(element.dataset.decimals ?? "0");
-
-  if (prefersReducedMotion) {
-    element.textContent = `${prefix}${targetValue.toFixed(decimalPlaces)}${suffix}`;
-    return;
-  }
-
-  const durationMs = 300;
-  const startTime = performance.now();
-
-  const tick = (now) => {
-    const elapsed = now - startTime;
-    const progress = Math.min(elapsed / durationMs, 1);
-    const easedProgress = 1 - (1 - progress) ** 3;
-    const currentValue = targetValue * easedProgress;
-    element.textContent = `${prefix}${currentValue.toFixed(decimalPlaces)}${suffix}`;
-
-    if (progress < 1) {
-      window.requestAnimationFrame(tick);
-      return;
-    }
-
-    element.textContent = `${prefix}${targetValue.toFixed(decimalPlaces)}${suffix}`;
-  };
-
-  window.requestAnimationFrame(tick);
+const loadNonCriticalAnimations = () => {
+  import("./animations.js")
+    .then(({ initAnimations }) => {
+      initAnimations();
+    })
+    .catch((error) => {
+      console.warn("Nie udało się załadować modułu animacji:", error);
+    });
 };
 
-if (revealItems.length) {
-  revealItems.forEach((item, index) => {
-    item.classList.add("reveal-on-scroll");
-    item.style.setProperty("--reveal-delay", `${Math.min(index * 35, 210)}ms`);
+if ("requestIdleCallback" in window) {
+  window.requestIdleCallback(loadNonCriticalAnimations, { timeout: 1200 });
+} else {
+  window.setTimeout(loadNonCriticalAnimations, 600);
+}
+
+const observeWebVitals = () => {
+  let cls = 0;
+
+  const vitalsObserver = new PerformanceObserver((list) => {
+    for (const entry of list.getEntries()) {
+      if (entry.entryType === "largest-contentful-paint") {
+        console.info("[Web Vitals] LCP:", Math.round(entry.startTime), "ms");
+      }
+
+      if (entry.entryType === "layout-shift" && !entry.hadRecentInput) {
+        cls += entry.value;
+        console.info("[Web Vitals] CLS:", Number(cls.toFixed(4)));
+      }
+
+      if (entry.entryType === "event" && entry.name === "click") {
+        console.info("[Web Vitals] INP(click):", Math.round(entry.duration), "ms");
+      }
+    }
   });
 
-  if (prefersReducedMotion) {
-    revealItems.forEach((item) => item.classList.add("is-visible"));
-  } else {
-    const revealObserver = new IntersectionObserver(
-      (entries, observer) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) {
-            return;
-          }
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        });
-      },
-      { threshold: 0.2, rootMargin: "0px 0px -8% 0px" },
-    );
-
-    revealItems.forEach((item) => revealObserver.observe(item));
+  try {
+    vitalsObserver.observe({ type: "largest-contentful-paint", buffered: true });
+    vitalsObserver.observe({ type: "layout-shift", buffered: true });
+    vitalsObserver.observe({ type: "event", durationThreshold: 40, buffered: true });
+  } catch (error) {
+    console.warn("PerformanceObserver nie wspiera wszystkich metryk:", error);
   }
-}
+};
 
-if (statNumbers.length) {
-  if (prefersReducedMotion) {
-    statNumbers.forEach(animateCount);
-  } else {
-    const statsObserver = new IntersectionObserver(
-      (entries, observer) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) {
-            return;
-          }
-
-          animateCount(entry.target);
-          observer.unobserve(entry.target);
-        });
-      },
-      { threshold: 0.5 },
-    );
-
-    statNumbers.forEach((stat) => statsObserver.observe(stat));
-  }
-}
+observeWebVitals();
 
 const requiredFields = ["name", "email", "company", "industry", "scale", "budget", "timeline"];
 
