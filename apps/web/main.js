@@ -31,9 +31,10 @@ const animateCount = (element) => {
   const targetValue = Number(element.dataset.value ?? "0");
   const prefix = element.dataset.prefix ?? "";
   const suffix = element.dataset.suffix ?? "";
+  const decimalPlaces = Number(element.dataset.decimals ?? "0");
 
   if (prefersReducedMotion) {
-    element.textContent = `${prefix}${targetValue}${suffix}`;
+    element.textContent = `${prefix}${targetValue.toFixed(decimalPlaces)}${suffix}`;
     return;
   }
 
@@ -44,23 +45,24 @@ const animateCount = (element) => {
     const elapsed = now - startTime;
     const progress = Math.min(elapsed / durationMs, 1);
     const easedProgress = 1 - (1 - progress) ** 3;
-    const currentValue = Math.round(targetValue * easedProgress);
-    element.textContent = `${prefix}${currentValue}${suffix}`;
+    const currentValue = targetValue * easedProgress;
+    element.textContent = `${prefix}${currentValue.toFixed(decimalPlaces)}${suffix}`;
 
     if (progress < 1) {
       window.requestAnimationFrame(tick);
       return;
     }
 
-    element.textContent = `${prefix}${targetValue}${suffix}`;
+    element.textContent = `${prefix}${targetValue.toFixed(decimalPlaces)}${suffix}`;
   };
 
   window.requestAnimationFrame(tick);
 };
 
 if (revealItems.length) {
-  revealItems.forEach((item) => {
+  revealItems.forEach((item, index) => {
     item.classList.add("reveal-on-scroll");
+    item.style.setProperty("--reveal-delay", `${Math.min(index * 35, 210)}ms`);
   });
 
   if (prefersReducedMotion) {

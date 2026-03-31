@@ -125,10 +125,34 @@ body {
 }
 
 .nav-list a {
+  position: relative;
   color: var(--color-text);
   text-decoration: none;
   font-weight: var(--font-weight-medium);
   font-size: 0.92rem;
+  transition: color var(--motion-fast) var(--motion-ease);
+}
+
+.nav-list a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -0.2rem;
+  width: 100%;
+  height: 2px;
+  background: var(--color-primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--motion-base) var(--motion-ease);
+}
+
+.nav-list a:hover {
+  color: var(--color-primary);
+}
+
+.nav-list a:hover::after,
+.nav-list a:focus-visible::after {
+  transform: scaleX(1);
 }
 
 .nav-cta {
@@ -298,6 +322,7 @@ h1 {
 .pricing-grid article,
 .contact-box {
   padding: var(--space-5);
+  transition: transform var(--motion-fast) var(--motion-ease), box-shadow var(--motion-base) var(--motion-ease);
 }
 
 .feature-grid article:hover,
@@ -472,6 +497,7 @@ textarea[aria-invalid='true'] {
   opacity: 0;
   transform: translateY(14px);
   transition: opacity var(--motion-base) var(--motion-ease), transform var(--motion-base) var(--motion-ease);
+  transition-delay: var(--reveal-delay, 0ms);
 }
 
 .reveal-on-scroll.is-visible {
@@ -577,5 +603,6 @@ textarea[aria-invalid='true'] {
   .thank-you-panel {
     opacity: 1;
     transform: none;
+    transition-delay: 0ms !important;
   }
 }
