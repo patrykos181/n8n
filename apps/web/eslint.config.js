@@ -20,4 +20,12 @@ export default [
       "@typescript-eslint/consistent-type-imports": "error",
     },
   },
+  {
+    files: ["*.js"],
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+      },
+    },
+  },
 ];
