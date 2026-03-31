@@ -33,7 +33,7 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
-      - run: npm test -- --ci
+      - run: npm test
 
   security_scan:
     name: Security scan (CodeQL)
