@@ -1,153 +1,100 @@
 const yearElement = document.getElementById("year");
-const whyUsSection = document.getElementById("why-us");
+const contactForm = document.getElementById("contact-form");
+const leadSummary = document.getElementById("lead-summary");
+const thankYouPanel = document.getElementById("thank-you-panel");
+const faqItems = document.querySelectorAll(".faq-accordion details");
 
 if (yearElement) {
   yearElement.textContent = String(new Date().getFullYear());
 }
 
-if (whyUsSection) {
-  whyUsSection.insertAdjacentHTML(
-    "beforebegin",
-    `
-      <section id="case-studies" class="section section-alt">
-        <div class="container">
-          <h2>Case studies i wyniki</h2>
-          <p>Przykładowe wdrożenia pokazujące konkretne metryki biznesowe i operacyjne.</p>
-          <div class="feature-grid">
-            <article>
-              <h3>Biuro rachunkowe (35 osób)</h3>
-              <p><strong>Zakres:</strong> automatyzacja obiegu dokumentów i wysyłki przypomnień do klientów.</p>
-              <p><strong>Efekt:</strong> oszczędność ~62 godzin miesięcznie oraz skrócenie procesu z 3 dni do 1 dnia.</p>
-              <p><strong>Jakość:</strong> redukcja błędów ręcznego przepisywania danych o 43%.</p>
-            </article>
-            <article>
-              <h3>E-commerce B2C (50 tys. zamówień/mies.)</h3>
-              <p><strong>Zakres:</strong> automatyzacja statusów zamówień, zwrotów i aktualizacji CRM.</p>
-              <p><strong>Efekt:</strong> skrócenie czasu obsługi zgłoszeń z 18h do 4h (SLA -78%).</p>
-              <p><strong>Jakość:</strong> spadek liczby błędów w statusach zamówień o 51%.</p>
-            </article>
-            <article>
-              <h3>Software house (120 osób)</h3>
-              <p><strong>Zakres:</strong> automatyzacja handoffu leadów i raportowania pipeline sprzedaży.</p>
-              <p><strong>Efekt:</strong> skrócenie procesu kwalifikacji leadów z 2 dni do 2 godzin.</p>
-              <p><strong>Jakość:</strong> 100% leadów z kompletem danych oraz -37% zduplikowanych wpisów.</p>
-            </article>
-          </div>
-          <div class="logo-wall" aria-label="Logo klientów i partnerów (za zgodą)">
-            <p class="eyebrow">Wybrane marki i partnerzy (za zgodą)</p>
-            <ul>
-              <li>Logo klienta A</li>
-              <li>Logo klienta B</li>
-              <li>Logo partnera C</li>
-              <li>Logo klienta D</li>
-              <li>Logo partnera E</li>
-            </ul>
-          </div>
-          <div class="testimonials">
-            <article>
-              <p>„Tu wstaw krótką referencję klienta (po uzyskaniu zgody na publikację).”</p>
-              <p><strong>Imię i nazwisko, stanowisko, firma</strong></p>
-            </article>
-            <article>
-              <p>„Tu wstaw drugą referencję opisującą wynik biznesowy wdrożenia.”</p>
-              <p><strong>Imię i nazwisko, stanowisko, firma</strong></p>
-            </article>
-          </div>
-        </div>
-      </section>
+if (faqItems.length) {
+  faqItems.forEach((item) => {
+    item.addEventListener("toggle", () => {
+      if (!item.open) {
+        return;
+      }
 
-      <section id="process" class="section">
-        <div class="container">
-          <h2>Proces wdrożenia krok po kroku</h2>
-          <p>Standardowy harmonogram dla pierwszego MVP obejmuje 2–4 tygodnie.</p>
-          <ol class="process-list">
-            <li>
-              <h3>1. Discovery i priorytety (2–3 dni)</h3>
-              <p>Warsztat procesowy, wybór use case’ów oraz ustalenie KPI i właścicieli procesu.</p>
-            </li>
-            <li>
-              <h3>2. Projekt techniczny (2 dni)</h3>
-              <p>Architektura workflow, dobór integracji API/webhook i plan obsługi błędów.</p>
-            </li>
-            <li>
-              <h3>3. Implementacja MVP (5–8 dni)</h3>
-              <p>Budowa automatyzacji, konfiguracja środowiska, testy funkcjonalne i bezpieczeństwa.</p>
-            </li>
-            <li>
-              <h3>4. Go-live i szkolenie (1–2 dni)</h3>
-              <p>Uruchomienie na produkcji, instruktaż dla zespołu oraz monitoring pierwszych uruchomień.</p>
-            </li>
-            <li>
-              <h3>5. Optymalizacja 30-dniowa</h3>
-              <p>Przegląd wyników, poprawki wydajności i plan kolejnych automatyzacji.</p>
-            </li>
-          </ol>
-        </div>
-      </section>
+      faqItems.forEach((other) => {
+        if (other !== item) {
+          other.open = false;
+        }
+      });
+    });
+  });
+}
 
-      <section id="portfolio" class="section section-alt">
-        <div class="container">
-          <h2>Mini-portfolio gotowych automatyzacji</h2>
-          <div class="portfolio-grid">
-            <article>
-              <h3>CRM i sprzedaż</h3>
-              <ul>
-                <li>Lead routing do handlowców na podstawie segmentu i źródła.</li>
-                <li>Automatyczne follow-upy po demo oraz aktualizacja statusów w CRM.</li>
-                <li>Alerty o leadach wysokiej intencji w Slack/Teams.</li>
-              </ul>
-            </article>
-            <article>
-              <h3>E-commerce</h3>
-              <ul>
-                <li>Synchronizacja zamówień, płatności i statusów dostaw.</li>
-                <li>Automatyzacja procesu zwrotów i powiadomień dla klienta.</li>
-                <li>Raport marży i sprzedaży dziennej do dashboardu zarządczego.</li>
-              </ul>
-            </article>
-            <article>
-              <h3>Finanse</h3>
-              <ul>
-                <li>Automatyczne uzgadnianie faktur z płatnościami.</li>
-                <li>Przypomnienia o płatnościach i eskalacje należności przeterminowanych.</li>
-                <li>Generowanie miesięcznych raportów cashflow.</li>
-              </ul>
-            </article>
-            <article>
-              <h3>HR i operacje</h3>
-              <ul>
-                <li>Onboarding pracownika: konta, checklista i powiadomienia dla działów.</li>
-                <li>Automatyzacja obiegu wniosków urlopowych i akceptacji.</li>
-                <li>Zbieranie danych do oceny okresowej i raportów HR.</li>
-              </ul>
-            </article>
-          </div>
-        </div>
-      </section>
+const requiredFields = ["name", "email", "company", "industry", "scale", "budget", "timeline"];
 
-      <section id="faq" class="section">
-        <div class="container">
-          <h2>Najczęstsze obawy</h2>
-          <div class="faq-list">
-            <article>
-              <h3>„Czy to nie będzie zbyt skomplikowane dla naszego zespołu?”</h3>
-              <p>Projektujemy rozwiązania pod konkretne role i procesy, a na starcie szkolimy zespół na realnych przykładach.</p>
-            </article>
-            <article>
-              <h3>„Co jeśli automatyzacja przestanie działać?”</h3>
-              <p>Każdy workflow ma monitoring, alerty i procedury awaryjne. W pakiecie utrzymaniowym zapewniamy SLA reakcji.</p>
-            </article>
-            <article>
-              <h3>„Czy integracja z naszymi narzędziami jest możliwa?”</h3>
-              <p>Pracujemy na API i webhookach, łącząc najczęściej CRM, ERP, e-commerce, helpdesk i narzędzia finansowe.</p>
-            </article>
-            <article>
-              <h3>„Kiedy zobaczymy pierwsze efekty?”</h3>
-              <p>Pierwszy proces MVP uruchamiamy zwykle w 2–4 tygodnie, a pierwsze metryki biznesowe raportujemy po 30 dniach.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-    `,
-  );
+const setFieldError = (fieldName, message) => {
+  const field = contactForm?.elements.namedItem(fieldName);
+  const errorElement = document.querySelector(`[data-error-for="${fieldName}"]`);
+
+  if (field && "setAttribute" in field) {
+    if (message) {
+      field.setAttribute("aria-invalid", "true");
+    } else {
+      field.removeAttribute("aria-invalid");
+    }
+  }
+
+  if (errorElement) {
+    errorElement.textContent = message;
+  }
+};
+
+if (contactForm && leadSummary && thankYouPanel) {
+  contactForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    let hasErrors = false;
+    requiredFields.forEach((fieldName) => {
+      const field = contactForm.elements.namedItem(fieldName);
+      const value = field?.value?.trim();
+      const message = value ? "" : "To pole jest wymagane.";
+
+      setFieldError(fieldName, message);
+      if (message) {
+        hasErrors = true;
+      }
+    });
+
+    const emailField = contactForm.elements.namedItem("email");
+    if (emailField?.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailField.value)) {
+      setFieldError("email", "Podaj poprawny adres e-mail.");
+      hasErrors = true;
+    }
+
+    if (hasErrors) {
+      leadSummary.textContent = "Formularz zawiera błędy. Uzupełnij pola oznaczone na czerwono.";
+      leadSummary.className = "form-message form-error";
+      thankYouPanel.hidden = true;
+      return;
+    }
+
+    const submitButton = contactForm.querySelector('button[type="submit"]');
+    submitButton?.classList.add("is-loading");
+    submitButton?.setAttribute("aria-disabled", "true");
+    if (submitButton instanceof HTMLButtonElement) {
+      submitButton.disabled = true;
+    }
+
+    leadSummary.textContent = "Wysyłanie formularza...";
+    leadSummary.className = "form-message form-loading";
+
+    await new Promise((resolve) => {
+      setTimeout(resolve, 1000);
+    });
+
+    submitButton?.classList.remove("is-loading");
+    submitButton?.removeAttribute("aria-disabled");
+    if (submitButton instanceof HTMLButtonElement) {
+      submitButton.disabled = false;
+    }
+
+    leadSummary.textContent = "Dziękujemy! Twoje zapytanie zostało wysłane.";
+    leadSummary.className = "form-message form-success";
+    thankYouPanel.hidden = false;
+    contactForm.reset();
+  });
 }
