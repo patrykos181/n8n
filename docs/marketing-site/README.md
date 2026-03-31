@@ -6,6 +6,12 @@
 - Skracać czas do pierwszej automatyzacji (self-qualification + edukacja).
 - Domykać pętlę pomiarową w lejku: **visit → signup → activation**.
 
+## Szybkie materiały operacyjne
+
+- Pakiet treści SEO/BOFU dla usług: `docs/marketing-site/content-plan-uslugi-n8n-pl.md`.
+
+---
+
 ## 1) Strony do wdrożenia
 
 ### Architektura nawigacji (PL) — wersja usługowa
