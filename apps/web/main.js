@@ -3,6 +3,9 @@ const contactForm = document.getElementById("contact-form");
 const leadSummary = document.getElementById("lead-summary");
 const thankYouPanel = document.getElementById("thank-you-panel");
 const faqItems = document.querySelectorAll(".faq-accordion details");
+const revealItems = document.querySelectorAll("main > section, .section-cta");
+const statNumbers = document.querySelectorAll(".stat-number");
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 if (yearElement) {
   yearElement.textContent = String(new Date().getFullYear());
@@ -22,6 +25,84 @@ if (faqItems.length) {
       });
     });
   });
+}
+
+const animateCount = (element) => {
+  const targetValue = Number(element.dataset.value ?? "0");
+  const prefix = element.dataset.prefix ?? "";
+  const suffix = element.dataset.suffix ?? "";
+
+  if (prefersReducedMotion) {
+    element.textContent = `${prefix}${targetValue}${suffix}`;
+    return;
+  }
+
+  const durationMs = 300;
+  const startTime = performance.now();
+
+  const tick = (now) => {
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed / durationMs, 1);
+    const easedProgress = 1 - (1 - progress) ** 3;
+    const currentValue = Math.round(targetValue * easedProgress);
+    element.textContent = `${prefix}${currentValue}${suffix}`;
+
+    if (progress < 1) {
+      window.requestAnimationFrame(tick);
+      return;
+    }
+
+    element.textContent = `${prefix}${targetValue}${suffix}`;
+  };
+
+  window.requestAnimationFrame(tick);
+};
+
+if (revealItems.length) {
+  revealItems.forEach((item) => {
+    item.classList.add("reveal-on-scroll");
+  });
+
+  if (prefersReducedMotion) {
+    revealItems.forEach((item) => item.classList.add("is-visible"));
+  } else {
+    const revealObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.2, rootMargin: "0px 0px -8% 0px" },
+    );
+
+    revealItems.forEach((item) => revealObserver.observe(item));
+  }
+}
+
+if (statNumbers.length) {
+  if (prefersReducedMotion) {
+    statNumbers.forEach(animateCount);
+  } else {
+    const statsObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          animateCount(entry.target);
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.5 },
+    );
+
+    statNumbers.forEach((stat) => statsObserver.observe(stat));
+  }
 }
 
 const requiredFields = ["name", "email", "company", "industry", "scale", "budget", "timeline"];
@@ -68,6 +149,7 @@ if (contactForm && leadSummary && thankYouPanel) {
     if (hasErrors) {
       leadSummary.textContent = "Formularz zawiera błędy. Uzupełnij pola oznaczone na czerwono.";
       leadSummary.className = "form-message form-error";
+      thankYouPanel.classList.remove("is-visible");
       thankYouPanel.hidden = true;
       return;
     }
@@ -95,6 +177,7 @@ if (contactForm && leadSummary && thankYouPanel) {
     leadSummary.textContent = "Dziękujemy! Twoje zapytanie zostało wysłane.";
     leadSummary.className = "form-message form-success";
     thankYouPanel.hidden = false;
+    thankYouPanel.classList.add("is-visible");
     contactForm.reset();
   });
 }
