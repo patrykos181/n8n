@@ -2,11 +2,62 @@
   "organization": {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "Twoja firma",
+    "@id": "https://example.com/#organization",
+    "name": "[Nazwa firmy]",
     "url": "https://example.com",
     "logo": "https://example.com/logo.png",
-    "sameAs": [
-      "https://www.linkedin.com/company/twoja-firma"
+    "sameAs": ["https://www.linkedin.com/company/nazwa-firmy"]
+  },
+  "website": {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://example.com/#website",
+    "url": "https://example.com",
+    "name": "[Nazwa firmy]",
+    "inLanguage": "pl-PL",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://example.com/szukaj?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  },
+  "service": {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "Wdrożenia n8n i integracje systemów",
+    "provider": {
+      "@type": "Organization",
+      "@id": "https://example.com/#organization"
+    },
+    "areaServed": "PL",
+    "offers": {
+      "@type": "Offer",
+      "url": "https://example.com/uslugi",
+      "priceCurrency": "PLN"
+    }
+  },
+  "breadcrumb": {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://example.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Usługi",
+        "item": "https://example.com/uslugi"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Wdrożenia n8n",
+        "item": "https://example.com/uslugi/wdrozenia-n8n"
+      }
     ]
   },
   "faqPage": {
@@ -15,10 +66,18 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "Jak szybko uruchomimy pierwszą automatyzację?",
+        "name": "Ile trwa wdrożenie n8n?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Pierwsze workflow zwykle wdrażamy w 7-14 dni roboczych."
+          "text": "Typowo 2-6 tygodni, zależnie od liczby integracji, jakości danych i wymagań bezpieczeństwa."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Czy integrujecie ERP i CRM?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Tak. Integrujemy systemy przez API, webhooki, kolejki i bazę danych, z monitoringiem i alertami."
         }
       }
     ]
@@ -26,15 +85,18 @@
   "article": {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "Jak wdrożyć n8n w firmie",
+    "headline": "E-commerce: automatyzacja obsługi zamówień i zwrotów w n8n",
     "author": {
       "@type": "Person",
-      "name": "Imię Nazwisko"
+      "name": "[Imię Nazwisko]"
     },
-    "datePublished": "2026-03-30",
+    "datePublished": "2026-03-31",
+    "dateModified": "2026-03-31",
     "publisher": {
       "@type": "Organization",
-      "name": "Twoja firma"
-    }
+      "@id": "https://example.com/#organization"
+    },
+    "mainEntityOfPage": "https://example.com/blog/e-commerce-automatyzacja-zamowien-zwrotow-n8n",
+    "inLanguage": "pl-PL"
   }
 }
